@@ -1,23 +1,252 @@
-body {
-    background: #232946;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    text-align: center;
+/* Enhanced Pong Game Styles */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #232946 0%, #121629 100%);
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+#game-header {
+    padding: 20px;
+    background: rgba(18, 22, 41, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid #eebbc3;
+}
+
+#game-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px #eebbc3;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 20px #eebbc3; }
+    to { text-shadow: 0 0 30px #eebbc3, 0 0 40px #eebbc3; }
+}
+
+#game-info {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.info-section {
+    font-size: 1rem;
+    color: #f6e7cb;
+}
+
+#difficulty {
+    background: #232946;
+    color: #fff;
+    border: 2px solid #eebbc3;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#difficulty:hover {
+    background: #eebbc3;
+    color: #232946;
 }
 
 #game-container {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    position: relative;
+    padding: 20px;
 }
 
 canvas {
-    background: #121629;
-    border: 3px solid #eebbc3;
-    border-radius: 12px;
+    background: radial-gradient(circle at center, #121629 0%, #0a0d1a 100%);
+    border: 4px solid #eebbc3;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(238, 187, 195, 0.3);
     display: block;
-    margin: auto;
+    transition: all 0.3s ease;
+}
+
+canvas:hover {
+    box-shadow: 0 0 50px rgba(238, 187, 195, 0.5);
+}
+
+/* Overlay Styles */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(18, 22, 41, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    transition: opacity 0.3s ease;
+}
+
+.overlay.hidden {
+    display: none;
+}
+
+.overlay-content {
+    text-align: center;
+    padding: 40px;
+    background: rgba(35, 41, 70, 0.9);
+    border: 3px solid #eebbc3;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(238, 187, 195, 0.3);
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.overlay-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #eebbc3;
+    text-shadow: 0 0 10px #eebbc3;
+}
+
+.overlay-content p {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #f6e7cb;
+}
+
+button {
+    background: linear-gradient(45deg, #eebbc3, #f6e7cb);
+    color: #232946;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 10px;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(238, 187, 195, 0.4);
+    background: linear-gradient(45deg, #f6e7cb, #eebbc3);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Scoreboard */
+#scoreboard {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    padding: 20px;
+    background: rgba(18, 22, 41, 0.8);
+    backdrop-filter: blur(10px);
+    border-top: 2px solid #eebbc3;
+}
+
+.score-section {
+    text-align: center;
+}
+
+.score-section h3 {
+    font-size: 1.5rem;
+    color: #f6e7cb;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.score {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #eebbc3;
+    text-shadow: 0 0 20px #eebbc3;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #game-header h1 {
+        font-size: 2rem;
+    }
+    
+    #game-info {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    canvas {
+        width: 90vw;
+        height: auto;
+    }
+    
+    #scoreboard {
+        gap: 50px;
+        padding: 15px;
+    }
+    
+    .score {
+        font-size: 2rem;
+    }
+    
+    .overlay-content {
+        padding: 30px;
+        margin: 20px;
+    }
+    
+    .overlay-content h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #game-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .overlay-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    button {
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
 }
