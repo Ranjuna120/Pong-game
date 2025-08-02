@@ -2,14 +2,69 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Simple Pong Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Pong Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Simple Pong Game</h2>
-    <div id="game-container">
-        <canvas id="pongCanvas" width="800" height="500"></canvas>
+    <div id="game-header">
+        <h1>🏓 Enhanced Pong Game</h1>
+        <div id="game-info">
+            <div class="info-section">
+                <span>Difficulty: </span>
+                <select id="difficulty">
+                    <option value="easy">Easy</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="hard">Hard</option>
+                    <option value="insane">Insane</option>
+                </select>
+            </div>
+            <div class="info-section">
+                <span>Controls: Mouse/Arrow Keys | Space: Pause</span>
+            </div>
+        </div>
     </div>
+    
+    <div id="game-container">
+        <canvas id="pongCanvas" width="900" height="600"></canvas>
+        
+        <div id="start-screen" class="overlay">
+            <div class="overlay-content">
+                <h2>🏓 Ready to Play?</h2>
+                <p>Use mouse or arrow keys to control your paddle</p>
+                <p>Press SPACE to pause during game</p>
+                <button id="start-btn">Start Game</button>
+            </div>
+        </div>
+        
+        <div id="pause-screen" class="overlay hidden">
+            <div class="overlay-content">
+                <h2>⏸️ Game Paused</h2>
+                <p>Press SPACE to resume</p>
+                <button id="resume-btn">Resume</button>
+            </div>
+        </div>
+        
+        <div id="game-over-screen" class="overlay hidden">
+            <div class="overlay-content">
+                <h2 id="winner-text">🏆 Game Over!</h2>
+                <p id="final-score">Final Score: 0 - 0</p>
+                <button id="restart-btn">Play Again</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="scoreboard">
+        <div class="score-section">
+            <h3>Player</h3>
+            <div id="player-score" class="score">0</div>
+        </div>
+        <div class="score-section">
+            <h3>AI</h3>
+            <div id="ai-score" class="score">0</div>
+        </div>
+    </div>
+    
     <script src="script.js"></script>
 </body>
 </html>
