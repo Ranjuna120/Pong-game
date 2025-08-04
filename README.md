@@ -117,6 +117,49 @@ Pong-game/
 - Deploy to GitHub Pages, Netlify, or Vercel
 - Simply upload files to any web hosting service
 
+## ⚡ Quick Run Commands
+
+### Windows Users:
+```powershell
+# Method 1: Open directly in default browser
+start index.html
+
+# Method 2: Using Python server
+python -m http.server 8080
+# Then open: http://localhost:8080
+
+# Method 3: Using Node.js (if installed)
+npx http-server -p 8080
+# Then open: http://localhost:8080
+```
+
+### macOS/Linux Users:
+```bash
+# Method 1: Open directly in default browser
+open index.html        # macOS
+xdg-open index.html     # Linux
+
+# Method 2: Using Python server
+python3 -m http.server 8080
+# Then open: http://localhost:8080
+
+# Method 3: Using Node.js (if installed)
+npx http-server -p 8080
+# Then open: http://localhost:8080
+```
+
+### One-Line Commands:
+```bash
+# Quick Python server (any OS)
+python -m http.server 8080 && start http://localhost:8080
+
+# Quick Node.js server (any OS)
+npx http-server -p 8080 -o
+
+# VS Code with Live Server
+code . && echo "Right-click index.html → Open with Live Server"
+```
+
 ## 🎯 Game Features Breakdown
 
 ### Enhanced Physics
