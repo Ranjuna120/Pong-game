@@ -20,7 +20,10 @@
                 </select>
             </div>
             <div class="info-section">
-                <span>Controls: Mouse/Arrow Keys | Space: Pause</span>
+                <span>Controls: Mouse/Arrow Keys | Space: Pause | ESC: Exit</span>
+            </div>
+            <div class="info-section">
+                <button id="exit-btn" class="exit-button">Exit Game</button>
             </div>
         </div>
     </div>
@@ -50,6 +53,15 @@
                 <h2 id="winner-text">🏆 Game Over!</h2>
                 <p id="final-score">Final Score: 0 - 0</p>
                 <button id="restart-btn">Play Again</button>
+            </div>
+        </div>
+        
+        <div id="exit-screen" class="overlay hidden">
+            <div class="overlay-content">
+                <h2>👋 Thanks for Playing!</h2>
+                <p>Are you sure you want to exit the game?</p>
+                <button id="confirm-exit-btn">Yes, Exit</button>
+                <button id="cancel-exit-btn">Cancel</button>
             </div>
         </div>
     </div>
