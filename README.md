@@ -1,4 +1,4 @@
-# 🏓  Pong Game
+# 🏓 Pong Game
 
 A modern, feature-rich implementation of the classic Pong game with stunning visual effects, multiple difficulty levels, and enhanced gameplay mechanics.
 
