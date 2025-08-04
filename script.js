@@ -71,6 +71,11 @@ class EnhancedPongGame {
                 e.preventDefault();
                 this.togglePause();
             }
+            
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                this.showExitDialog();
+            }
         });
         
         document.addEventListener('keyup', (e) => {
@@ -88,6 +93,18 @@ class EnhancedPongGame {
         
         document.getElementById('restart-btn').addEventListener('click', () => {
             this.restartGame();
+        });
+        
+        document.getElementById('exit-btn').addEventListener('click', () => {
+            this.showExitDialog();
+        });
+        
+        document.getElementById('confirm-exit-btn').addEventListener('click', () => {
+            this.exitGame();
+        });
+        
+        document.getElementById('cancel-exit-btn').addEventListener('click', () => {
+            this.cancelExit();
         });
         
         document.getElementById('difficulty').addEventListener('change', (e) => {
@@ -124,6 +141,52 @@ class EnhancedPongGame {
         document.getElementById('start-screen').classList.remove('hidden');
         this.particles = [];
         this.initGame();
+    }
+    
+    showExitDialog() {
+        const previousState = this.gameState;
+        this.gameState = 'exitDialog';
+        this.previousGameState = previousState;
+        document.getElementById('exit-screen').classList.remove('hidden');
+    }
+    
+    cancelExit() {
+        this.gameState = this.previousGameState || 'start';
+        document.getElementById('exit-screen').classList.add('hidden');
+    }
+    
+    exitGame() {
+        // Create a farewell screen
+        document.body.innerHTML = `
+            <div style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background: linear-gradient(135deg, #232946 0%, #121629 100%);
+                color: #fff;
+                font-family: Arial, sans-serif;
+                text-align: center;
+                flex-direction: column;
+            ">
+                <h1 style="font-size: 3rem; margin-bottom: 20px; color: #eebbc3;">👋 Thanks for Playing!</h1>
+                <p style="font-size: 1.5rem; margin-bottom: 30px; color: #f6e7cb;">Hope you enjoyed the Enhanced Pong Game!</p>
+                <p style="font-size: 1rem; color: #eebbc3; margin-bottom: 20px;">Refresh the page to play again</p>
+                <button onclick="location.reload()" style="
+                    background: linear-gradient(45deg, #eebbc3, #f6e7cb);
+                    color: #232946;
+                    border: none;
+                    padding: 15px 30px;
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                ">Play Again</button>
+            </div>
+        `;
     }
     
     handleKeyboardInput() {
