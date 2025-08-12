@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favicon Generator</title>
+</head>
+<body>
+    <canvas id="faviconCanvas" width="32" height="32" style="border: 1px solid #ccc; image-rendering: pixelated; width: 128px; height: 128px;"></canvas>
+    <br><br>
+    <button onclick="downloadFavicon()">Download as PNG</button>
+    
+    <script>
+        const canvas = document.getElementById('faviconCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Draw Pong game favicon
+        function drawPongIcon() {
+            // Background
+            ctx.fillStyle = '#232946';
+            ctx.fillRect(0, 0, 32, 32);
+            
+            // Center line
+            ctx.strokeStyle = '#eebbc3';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([2, 2]);
+            ctx.globalAlpha = 0.6;
+            ctx.beginPath();
+            ctx.moveTo(16, 2);
+            ctx.lineTo(16, 30);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.globalAlpha = 1;
+            
+            // Left paddle (player)
+            ctx.fillStyle = '#f6e7cb';
+            ctx.fillRect(2, 8, 3, 16);
+            
+            // Right paddle (AI)
+            ctx.fillStyle = '#eebbc3';
+            ctx.fillRect(27, 6, 3, 16);
+            
+            // Ball
+            ctx.fillStyle = '#fffffe';
+            ctx.beginPath();
+            ctx.arc(20, 16, 2, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Ball trail
+            ctx.globalAlpha = 0.6;
+            ctx.beginPath();
+            ctx.arc(17, 16, 1.5, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.globalAlpha = 0.3;
+            ctx.beginPath();
+            ctx.arc(14, 16, 1, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+        }
+        
+        function downloadFavicon() {
+            const link = document.createElement('a');
+            link.download = 'favicon.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        drawPongIcon();
+    </script>
+</body>
+</html>
